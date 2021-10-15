@@ -1,0 +1,24 @@
+﻿@model Student_Portal.Models.ViewModels.CourseViewModel;
+
+
+<div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Course Id</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Register</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model.Courses)
+            {
+                <tr>
+                    <th scope="row">@course.Id</th>
+                    <td>@course.Name</td>
+                    <td><a class="bg-success" asp-action="RegisterCourse" asp-route-id=@course.Id></a></td>
+                </tr>
+            }
+            </tbody>
+    </table>
+</div>

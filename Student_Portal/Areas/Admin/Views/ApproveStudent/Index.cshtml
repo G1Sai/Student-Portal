@@ -1,0 +1,28 @@
+﻿@model Student_Portal.Models.ViewModels.ApproveStudentViewModel;
+
+<form method="post">
+<div>
+    <div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Student ID Number</th>
+                    <th scope="col">Approve</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model.unapprovedStudents)
+                {
+                    <tr>
+                        <th scope="row">@student.FullName</th>
+                        <td>@student.IdNumber</td>
+                        <input type="hidden" asp-for="studentId" value="@student.Id">
+                        <td><input type="submit"  asp-for="approve" value=true /><input type="submit" asp-for="approve" value=false /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</form>

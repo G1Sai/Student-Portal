@@ -13,8 +13,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Student_Portal.Controllers
-{  
-    [Authorize]
+{
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -30,10 +29,14 @@ namespace Student_Portal.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _db.ApplicationUser.Find(userId);
+            if (user != null)
+            {
+                ViewBag.Name = user.FullName;
+            }
             return View();
         }
 
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -1,0 +1,28 @@
+﻿@model Student_Portal.Models.ViewModels.CourseViewModel;
+
+<form method="post" action="RegisterCourse">
+<div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Course Id</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Register</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+            @foreach (var course in Model.Courses)
+            {
+                <tr>
+                    <th scope="row">@course.Id</th>
+                    <td>@course.Name</td>
+                    <input  class="bg-success" type="hidden" asp-for="CourseId" value="@course.Id" />
+                    <td><input class="bg-success" type="submit" value="Register" /></td>
+                </tr>
+            }}
+            </tbody>
+    </table>
+</div>
+</form>

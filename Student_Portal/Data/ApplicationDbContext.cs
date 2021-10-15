@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace Student_Portal.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
                 
         }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

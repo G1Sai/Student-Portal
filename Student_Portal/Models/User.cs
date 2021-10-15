@@ -7,6 +7,6 @@ namespace Student_Portal.Models
 {
     public class User
     {
-        public string Name;
+        public int Id { get; set; }
     }
 }

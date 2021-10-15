@@ -1,0 +1,24 @@
+﻿@model Student_Portal.Models.ViewModels.CourseViewModel;
+
+<div>
+    <button><a class="nav-link text-dark" asp-area="Admin" asp-controller="AddCourse">Add new Course</a></button>
+    <div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Course Id</th>
+                    <th scope="col">Course Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model.Courses)
+                {
+                    <tr>
+                        <th scope="row">@course.Id</th>
+                        <td>@course.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

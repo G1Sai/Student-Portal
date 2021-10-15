@@ -1,0 +1,24 @@
+﻿@model Student_Portal.Models.Course;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <table>
+        <tr>
+            <td ><label>Course Id</label></td>
+            <td><input asp-for="Id" /></td>
+        <tr>
+
+        <tr>
+        <td><label>Course Name</label></td>
+           <td> <input asp-for="Name" /></td>
+        </tr>
+    </table>
+    <div>
+
+        <button type="submit">Enter</button>
+    </div>
+</form>

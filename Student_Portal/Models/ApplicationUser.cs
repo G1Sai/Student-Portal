@@ -9,7 +9,7 @@ namespace Student_Portal.Models
     public class ApplicationUser : IdentityUser
     {
         public string FullName { get; set; }
-        public Boolean AdminApproved { get; set; }
-        public string IDNumber { get; set; }
-    }
+        public string IdNumber { get; set; }
+        public List<Course> RegisteredCourses { get; set; }
+    } 
 }
