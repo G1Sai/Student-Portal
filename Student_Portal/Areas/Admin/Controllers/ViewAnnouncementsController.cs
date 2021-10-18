@@ -13,24 +13,23 @@ namespace Student_Portal.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = UT.AdminRole)]
-    public class ViewCoursesController : Controller
+    public class ViewAnnouncementsController : Controller
     {
         public ApplicationDbContext dbContext;
-        public ViewCoursesController(ApplicationDbContext _dbContext)
+        public ViewAnnouncementsController(ApplicationDbContext _dbContext)
         {
             dbContext = _dbContext;
         }
         public IActionResult Index()
         {
-            CourseViewModel courseView = new CourseViewModel{ Courses = dbContext.Courses.ToList() };
-            return View(courseView);
+            AnnouncementViewModel announcementView = new AnnouncementViewModel{ Announcements = dbContext.Announcements.ToList() };
+            return View(announcementView);
         }
         [HttpPost]
-        public IActionResult Remove(CourseViewModel courseView)
+        public IActionResult Remove(AnnouncementViewModel announcementView)
         {
-            dbContext.Courses.Remove(dbContext.Courses.Where(o=>o.Id==courseView.CourseId).FirstOrDefault());
+            dbContext.Announcements.Remove(dbContext.Announcements.Where(o => o.Id == announcementView.Id).FirstOrDefault());
             dbContext.SaveChanges();
-
             return RedirectToAction("Index");
         }
     }

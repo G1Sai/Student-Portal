@@ -1,26 +1,24 @@
-﻿@model Student_Portal.Models.ViewModels.CourseViewModel;
+﻿@model Student_Portal.Models.ViewModels.AnnouncementViewModel;
 
     <form name="theForm" method="post" asp-action="Remove">
         <div>
-            <button><a class="nav-link text-dark" asp-area="Admin" asp-controller="AddCourse">Add new Course</a></button>
+            <button><a class="nav-link text-dark" asp-area="Admin" asp-controller="AddAnnouncements">Add new Announcements</a></button>
             <div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
-                <input type="hidden" id="CourseId" asp-for="CourseId" value="">
+                <input type="hidden" id="AnnouncementId" asp-for="Id" value="">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Course Id</th>
-                            <th scope="col">Course Name</th>
+                            <th scope="col">Notification</th>
                             <th scope="col">Remove</th>
                         </tr>
                     </thead>
                    
                     <tbody>
-                        @foreach (var course in Model.Courses)
+                        @foreach (var announcement in Model.Announcements)
                         {
                             <tr>
-                                <th scope="row">@course.Id</th>
-                                <td>@course.Name</td>
-                                <td><button id=@course.Id onclick="sendid(this.id)">Delete</button></td>
+                                <td>@announcement.Content</td>
+                                <td><button id=@announcement.Id onclick="sendid(this.id)">Delete</button></td>
                             </tr>
                         }
                     </tbody>
@@ -31,7 +29,7 @@
 
 <script>
     function sendid(Id) {
-        $("#CourseId").val(Id);
+        $("#AnnouncementId").val(Id);
         document.theForm.submit();
     };
 </script>
