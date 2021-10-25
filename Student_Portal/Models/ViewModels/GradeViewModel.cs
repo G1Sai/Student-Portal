@@ -5,10 +5,14 @@ using System.Threading.Tasks;
 
 namespace Student_Portal.Models.ViewModels
 {
-    public class CourseViewModel
+    public class GradeViewModel
     {
+        public List<CourseViewModel> courses { get; set; }
+        public string Name { get; set; }
+        public string Id { get; set; }
+        public string IdNumber { get; set; }
         public string CourseId { get; set; }
-        public string CourseName { get; set; }
         public char Grade { get; set; }
+
     }
 }

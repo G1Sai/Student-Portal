@@ -1,0 +1,25 @@
+﻿@model Student_Portal.Models.ViewModels.AnnouncementViewModel;
+
+<form name="theForm" method="post" asp-action="Remove">
+    <div>
+        <div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
+            <input type="hidden" id="AnnouncementId" asp-for="Id" value="">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Notification</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var announcement in Model.Announcements)
+                    {
+                        <tr>
+                            <td>@announcement.Content</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>

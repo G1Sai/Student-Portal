@@ -1,0 +1,33 @@
+﻿@model Student_Portal.Models.ViewModels.ApprovedStudentsListViewModel;
+
+<form name="thisForm" method="post" asp-action="Index">
+<div>
+    <div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
+        <input id="StudentId" type="hidden" asp-for="StudentId" value="">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Student ID Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model.ApprovedStudents)
+                {
+                    <tr>
+                        <td scope="row"><button id=@student.Id onclick="sendid(this.id)">@student.FullName</button></td>
+                        <td>@student.IdNumber</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</form>
+
+<script>
+    function sendid(Id) {
+        $("#StudentId").val(Id);
+        document.thisForm.submit();
+    };
+</script>

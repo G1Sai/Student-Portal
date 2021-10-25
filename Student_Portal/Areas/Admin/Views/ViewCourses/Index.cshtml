@@ -1,4 +1,4 @@
-﻿@model Student_Portal.Models.ViewModels.CourseViewModel;
+﻿@model Student_Portal.Models.ViewModels.CourseListViewModel;
 
     <form name="theForm" method="post" asp-action="Remove">
         <div>
@@ -10,6 +10,8 @@
                         <tr>
                             <th scope="col">Course Id</th>
                             <th scope="col">Course Name</th>
+                            <th scope="col">Credit Requirements</th>
+                            <th scope="col">Credits</th>
                             <th scope="col">Remove</th>
                         </tr>
                     </thead>
@@ -20,6 +22,8 @@
                             <tr>
                                 <th scope="row">@course.Id</th>
                                 <td>@course.Name</td>
+                                <td>@course.CreditRequirements</td>
+                                <td>@course.Credits</td>
                                 <td><button id=@course.Id onclick="sendid(this.id)">Delete</button></td>
                             </tr>
                         }

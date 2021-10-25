@@ -19,5 +19,6 @@ namespace Student_Portal.Data
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<StudentCourses> StudentCourses { get; set; }
     }
 }

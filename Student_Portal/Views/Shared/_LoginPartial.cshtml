@@ -7,7 +7,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FullName!</a>
         </li>
         <li class="nav-item">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -25,11 +25,18 @@
             <li class="nav-item">
                 <a id="manage" class="nav-link text-dark" asp-area="Admin" asp-controller="ApproveStudent">New Students</a>
             </li>
+
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-dark" asp-area="Admin" asp-controller="ApprovedStudentList">Approved Students List</a>
+            </li>
         }
         @if (User.IsInRole(UT.ApprovedStudentRole))
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="ApprovedStudent" asp-controller="ViewCourses">View Registered Courses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="ApprovedStudent" asp-controller="ViewAnnouncements">View Announcements</a>
             </li>
         }
     }

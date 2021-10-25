@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Student_Portal.Data;
 
 namespace Student_Portal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211025161832_UpdateViewModels")]
+    partial class UpdateViewModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -258,10 +260,6 @@ namespace Student_Portal.Migrations
 
             modelBuilder.Entity("Student_Portal.Models.StudentCourses", b =>
                 {
-                    b.Property<string>("EntryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("CourseId")
                         .HasColumnType("nvarchar(max)");
 
@@ -271,8 +269,6 @@ namespace Student_Portal.Migrations
 
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EntryId");
 
                     b.ToTable("StudentCourses");
                 });

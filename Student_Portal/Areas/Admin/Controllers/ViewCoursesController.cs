@@ -22,12 +22,13 @@ namespace Student_Portal.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            CourseViewModel courseView = new CourseViewModel{ Courses = dbContext.Courses.ToList() };
+            CourseListViewModel courseView = new CourseListViewModel{ Courses = dbContext.Courses.ToList() };
             return View(courseView);
         }
         [HttpPost]
         public IActionResult Remove(CourseViewModel courseView)
         {
+            dbContext.StudentCourses.RemoveRange(dbContext.StudentCourses.Where(entry=>entry.CourseId==courseView.CourseId));
             dbContext.Courses.Remove(dbContext.Courses.Where(o=>o.Id==courseView.CourseId).FirstOrDefault());
             dbContext.SaveChanges();
 

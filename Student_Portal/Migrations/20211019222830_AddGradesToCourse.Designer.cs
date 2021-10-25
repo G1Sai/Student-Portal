@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Student_Portal.Data;
 
 namespace Student_Portal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211019222830_AddGradesToCourse")]
+    partial class AddGradesToCourse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,42 +241,29 @@ namespace Student_Portal.Migrations
             modelBuilder.Entity("Student_Portal.Models.Course", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CreditRequirements")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Credits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("Student_Portal.Models.StudentCourses", b =>
-                {
-                    b.Property<string>("EntryId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CourseId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Grade")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<string>("StudentId")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EntryId");
+                    b.Property<int>("creditRequirements")
+                        .HasColumnType("int");
 
-                    b.ToTable("StudentCourses");
+                    b.Property<int>("credits")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -326,6 +315,18 @@ namespace Student_Portal.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Student_Portal.Models.Course", b =>
+                {
+                    b.HasOne("Student_Portal.Models.ApplicationUser", null)
+                        .WithMany("RegisteredCourses")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("Student_Portal.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("RegisteredCourses");
                 });
 #pragma warning restore 612, 618
         }

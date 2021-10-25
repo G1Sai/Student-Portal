@@ -5,20 +5,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form method="post">
+<form method="post" >
     <table>
         <tr>
-            <td ><label>Course Id</label></td>
+            <td><label>Course Id</label></td>
             <td><input asp-for="Id" /></td>
         <tr>
 
         <tr>
-        <td><label>Course Name</label></td>
-           <td> <input asp-for="Name" /></td>
+            <td><label>Course Name</label></td>
+            <td> <input asp-for="Name" /></td>
+        </tr>
+
+        <tr>
+            <td><label>Minimum Credits Required</label></td>
+            <td> <input asp-for="CreditRequirements" /></td>
+        </tr>
+
+        <tr>
+            <td><label>Number of Credits</label></td>
+            <td> <input asp-for="Credits" /></td>
         </tr>
     </table>
     <div>
-
         <button type="submit">Enter</button>
     </div>
 </form>

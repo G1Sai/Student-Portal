@@ -1,0 +1,41 @@
+﻿@model Student_Portal.Models.ViewModels.GradeViewModel;
+
+    <form name="theForm" method="post" asp-action="UpdateGrade">
+        <div>
+            <div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
+                <input type="hidden" asp-for="CourseId" id="CourseId">
+                <input type="hidden" asp-for="Grade" id="Grade">
+                <input type="hidden" asp-for="Id" value=@Model.Id id="Id">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Course Id</th>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">Grade</th>
+                            <th scope="col">Grade Change</th>
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                        @foreach (var course in Model.courses)
+                        {
+                            <tr>
+                                <th scope="row">@course.CourseId</th>
+                                <td>@course.CourseName</td>
+                                <td>@course.Grade</td>
+                                <td><button value=@course.CourseId id=@UT.Distinction onclick="sendid(this.value,this.id)">A</button><button value=@course.CourseId id=@UT.Pass onclick="sendid(this.value, this.id)">C</button><button value=@course.CourseId id=@UT.FailGrade onclick="sendid(this.value, this.id)">F</button><button value=@course.CourseId id=@UT.Reset onclick="sendid(this.value, this.id)">Reset</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+
+<script>
+    function sendid(Id,Grade) {
+        $("#CourseId").val(Id);
+        $("#Grade").val(Grade);
+        document.theForm.submit();
+    };
+</script>

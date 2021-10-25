@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Student_Portal.Areas.ApprovedStudent.Controllers
 {
     [Area("ApprovedStudent")]
-    [Authorize(Roles=UT.ApprovedStudentRole)]
+    [Authorize(Roles = UT.ApprovedStudentRole)]
     [Route("/ApprovedStudent/ViewCourses")]
     public class ViewCoursesController : Controller
     {
@@ -30,25 +30,21 @@ namespace Student_Portal.Areas.ApprovedStudent.Controllers
         public IActionResult Index()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            CourseViewModel courseView;
-            try
-            {
-                List<Course> allCourses = dbContext.Courses.ToList();
-             //   ApplicationUser user1 = dbContext.ApplicationUser.Where(o => o.Id == userId).FirstOrDefault();
-                ApplicationUser user = dbContext.ApplicationUser.Where(o => o.Id == userId).FirstOrDefault();
-                if (user.RegisteredCourses == null)
-                {
-                    throw new Exception();
-                }
-                courseView = new CourseViewModel { Courses = user.RegisteredCourses };
-            }
-            catch (Exception e)
-            {
-                dbContext.ApplicationUser.Where(o => o.Id == userId).FirstOrDefault().RegisteredCourses = new List<Course>();
-                dbContext.SaveChanges();
-                courseView = new CourseViewModel {Courses=dbContext.ApplicationUser.Where(o => o.Id == userId).FirstOrDefault().RegisteredCourses};
-            }
-                return View(courseView);
+
+            List<Course> allCourses = dbContext.Courses.ToList();
+            //   ApplicationUser user1 = dbContext.ApplicationUser.Where(o => o.Id == userId).FirstOrDefault();
+            List<CourseViewModel> courses = dbContext.StudentCourses.Where(student => student.StudentId == student.StudentId).Select(courseView => new CourseViewModel { CourseId = courseView.CourseId, CourseName = dbContext.Courses.Where(course => course.Id == courseView.CourseId).Select(course => new string(course.Name)).FirstOrDefault(), Grade = courseView.Grade }).ToList();
+            GradeViewModel gradeViewModel = new GradeViewModel { Id = userId, courses = courses };
+            return View(gradeViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Remove(GradeViewModel gradeView)
+        {
+            dbContext.StudentCourses.RemoveRange(dbContext.StudentCourses.Where(entry => entry.CourseId == gradeView.CourseId));
+            dbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
+

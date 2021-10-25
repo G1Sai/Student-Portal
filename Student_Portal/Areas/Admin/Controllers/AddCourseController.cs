@@ -23,11 +23,25 @@ namespace Student_Portal.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public void Index(Course course)
+        public IActionResult Index(Course course)
         {
-            dbContext.Courses.Add(course);
-            dbContext.SaveChanges();
-            Response.Redirect("ViewCourses");
+            try
+            {
+                if(course.Id==null || course.Name ==null)
+                {
+                    throw new Exception();
+                }
+                dbContext.Courses.Add(course);
+                dbContext.SaveChanges();
+                return RedirectToAction("Index","ViewCourses");
+            }
+            catch(Exception e)
+            {
+                if (e!=null)
+                return RedirectToAction("Index","Error");
+            }
+
+            return RedirectToAction("Index","Error");
         }
     }
 }

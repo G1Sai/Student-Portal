@@ -10,6 +10,5 @@ namespace Student_Portal.Models
     {
         public string FullName { get; set; }
         public string IdNumber { get; set; }
-        public List<Course> RegisteredCourses { get; set; }
     } 
 }

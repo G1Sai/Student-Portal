@@ -1,24 +1,44 @@
-﻿@model Student_Portal.Models.ViewModels.CourseViewModel;
-
+﻿@model Student_Portal.Models.ViewModels.GradeViewModel;
+    
     <div>
-        <button><a class="nav-link text-dark" asp-area="ApprovedStudent" asp-controller="RegisterCourse">Register to a new course</a></button>
-        <div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Course Id</th>
-                        <th scope="col">Course Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var course in Model.Courses)
-                    {
-                        <tr>
-                            <th scope="row">@course.Id</th>
-                            <td>@course.Name</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+        <form method="post" asp-action="Remove">
+            <button><a class="nav-link text-dark" asp-area="ApprovedStudent" asp-controller="RegisterCourse">Register to a new course</a></button>
+            <div>
+                <input type="hidden" asp-for="CourseId" id="CourseId">
+                <div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Course Id</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Grade</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var course in Model.courses)
+                            {
+                                <tr>
+                                    <th scope="row">@course.CourseId</th>
+                                    <td>@course.CourseName</td>
+                                    <td>@course.Grade</td>
+
+                                    <td><button id=@course.CourseId onclick="sendid(this.id)">Delete</button></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </form>
     </div>
+
+
+    <script>
+        function sendid(Id) {
+            $("#CourseId").val(Id);
+            document.theForm.submit();
+        };
+    </script>

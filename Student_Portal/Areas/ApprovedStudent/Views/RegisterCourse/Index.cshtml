@@ -1,28 +1,36 @@
-﻿@model Student_Portal.Models.ViewModels.CourseViewModel;
+﻿@model Student_Portal.Models.ViewModels.CourseListViewModel;
 
-<form method="post" action="RegisterCourse">
-<div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Course Id</th>
-                <th scope="col">Course Name</th>
-                <th scope="col">Register</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null)
-            {
-            @foreach (var course in Model.Courses)
-            {
+<form method="post" name="theForm" action="RegisterCourse">
+    <div class="center bg-white" style="border-radius: 25px 25px 25px 25px;">
+
+        <input type="hidden" id="CourseId" asp-for="CourseId" />
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <th scope="row">@course.Id</th>
-                    <td>@course.Name</td>
-                    <input  class="bg-success" type="hidden" asp-for="CourseId" value="@course.Id" />
-                    <td><input class="bg-success" type="submit" value="Register" /></td>
+                    <th scope="col">Course Id</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Register</th>
                 </tr>
-            }}
+            </thead>
+            <tbody>
+
+                @if (Model != null)
+                {
+                    @foreach (var course in Model.Courses)
+                    {
+                        <tr>
+                            <th scope="row">@course.Id</th>
+                            <td>@course.Name</td>
+                            <td><button id=@course.Id onclick="register(this.id)">Register</button></td>
+                        </tr>
+                    }}
             </tbody>
-    </table>
-</div>
+        </table>
+    </div>
 </form>
+<script>
+    function register(courseId) {
+        $("#CourseId").val(courseId);
+        document.theForm.submit();
+    }
+</script>
