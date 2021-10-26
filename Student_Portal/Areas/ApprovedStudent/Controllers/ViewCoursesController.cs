@@ -33,7 +33,7 @@ namespace Student_Portal.Areas.ApprovedStudent.Controllers
 
             List<Course> allCourses = dbContext.Courses.ToList();
             //   ApplicationUser user1 = dbContext.ApplicationUser.Where(o => o.Id == userId).FirstOrDefault();
-            List<CourseViewModel> courses = dbContext.StudentCourses.Where(student => student.StudentId == student.StudentId).Select(courseView => new CourseViewModel { CourseId = courseView.CourseId, CourseName = dbContext.Courses.Where(course => course.Id == courseView.CourseId).Select(course => new string(course.Name)).FirstOrDefault(), Grade = courseView.Grade }).ToList();
+            List<CourseViewModel> courses = dbContext.StudentCourses.Where(student => student.StudentId == userId).Select(courseView => new CourseViewModel { CourseId = courseView.CourseId, CourseName = dbContext.Courses.Where(course => course.Id == courseView.CourseId).Select(course => new string(course.Name)).FirstOrDefault(), Grade = courseView.Grade }).ToList();
             GradeViewModel gradeViewModel = new GradeViewModel { Id = userId, courses = courses };
             return View(gradeViewModel);
         }

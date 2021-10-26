@@ -24,7 +24,7 @@ namespace Student_Portal.Areas.Admin.Controllers
         public IActionResult Index(string id)
         {
             ApplicationUser student = dbContext.ApplicationUser.Where(o => o.Id == id).FirstOrDefault();
-            List<CourseViewModel> courses = dbContext.StudentCourses.Where(student => student.StudentId == student.StudentId).Select(courseView => new CourseViewModel { CourseId = courseView.CourseId, CourseName = dbContext.Courses.Where(course => course.Id == courseView.CourseId).Select(course => new string(course.Name)).FirstOrDefault(), Grade=courseView.Grade }).ToList();
+            List<CourseViewModel> courses = dbContext.StudentCourses.Where(student => student.StudentId == id).Select(courseView => new CourseViewModel { CourseId = courseView.CourseId, CourseName = dbContext.Courses.Where(course => course.Id == courseView.CourseId).Select(course => new string(course.Name)).FirstOrDefault(), Grade=courseView.Grade }).ToList();
             GradeViewModel gradeViewModel = new GradeViewModel { Name=student.FullName, IdNumber=student.IdNumber, Id=student.Id, courses=courses};
             return View(gradeViewModel);
         }
